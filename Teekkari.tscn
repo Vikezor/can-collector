@@ -28,6 +28,11 @@ mass = 3.0
 position = Vector2(0, -15.5)
 shape = SubResource("RectangleShape2D_wpujk")
 
+[node name="Shoulder" type="PinJoint2D" parent="Torso"]
+position = Vector2(0, -24)
+node_a = NodePath("..")
+node_b = NodePath("../../Arm")
+
 [node name="Pelvis" type="PinJoint2D" parent="."]
 node_a = NodePath("..")
 node_b = NodePath("../Torso")
@@ -41,8 +46,3 @@ mass = 2.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm"]
 position = Vector2(14, -24)
 shape = SubResource("RectangleShape2D_g12rb")
-
-[node name="PinJoint2D" type="PinJoint2D" parent="."]
-position = Vector2(0, -24)
-node_a = NodePath("../Torso")
-node_b = NodePath("../Arm")
