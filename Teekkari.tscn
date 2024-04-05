@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://3lekv1okhlvj"]
+[gd_scene load_steps=6 format=3 uid="uid://3lekv1okhlvj"]
 
 [ext_resource type="Script" path="res://Teekkari.gd" id="1_sxbi6"]
 
@@ -10,8 +10,11 @@ radius = 20.2237
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpujk"]
 size = Vector2(6, 37)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g12rb"]
+size = Vector2(34, 5.5)
+
 [node name="Legs" type="RigidBody2D"]
-mass = 5.0
+mass = 2.0
 physics_material_override = SubResource("PhysicsMaterial_bnody")
 script = ExtResource("1_sxbi6")
 
@@ -19,7 +22,7 @@ script = ExtResource("1_sxbi6")
 shape = SubResource("CircleShape2D_f0ryg")
 
 [node name="Torso" type="RigidBody2D" parent="."]
-mass = 5.0
+mass = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Torso"]
 position = Vector2(0, -15.5)
@@ -29,3 +32,17 @@ shape = SubResource("RectangleShape2D_wpujk")
 node_a = NodePath("..")
 node_b = NodePath("../Torso")
 motor_target_velocity = 3.49066
+
+[node name="Arm" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+mass = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm"]
+position = Vector2(14, -24)
+shape = SubResource("RectangleShape2D_g12rb")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, -24)
+node_a = NodePath("../Torso")
+node_b = NodePath("../Arm")
