@@ -38,12 +38,7 @@ func _process(_delta):
 	diff = mouse_angle - arm_angle
 	if abs(diff) >= PI:
 		diff += (2 * PI * -sign(diff))
-	if diff > 0:
-		$Arm/CollisionShape2D/Shoulder.motor_target_velocity = 200
-	elif diff < 0:
-		$Arm/CollisionShape2D/Shoulder.motor_target_velocity = -200
-	else:
-		$Arm/CollisionShape2D/Shoulder.motor_target_velocity = 0
+	$Arm/CollisionShape2D/Shoulder.motor_target_velocity = 360 / PI * diff
 
 
 func _input(event):
