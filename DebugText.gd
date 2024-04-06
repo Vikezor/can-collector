@@ -8,9 +8,19 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var mouse_pos = get_viewport().get_mouse_position()
-	var teekkari_pos = get_viewport().get_screen_transform() * get_global_transform_with_canvas() * $Teekkari.position
 	text = "Mouse: {x}, {y}\n
-	Dude: {dx}, {dy}\n
-	Angle: {a}".format([["x", mouse_pos.x], ["y", mouse_pos.y], ["dx", teekkari_pos.x], ["dy", teekkari_pos.y], ["a", teekkari_pos.angle_to_point(mouse_pos)]])
+	Shoulder: {dx}, {dy}\n
+	Hand: {hx}, {hy}\n
+	Mouse angle: {ma}\n
+	Arm angle: {aa}\n
+	Difference: {d}".format([
+		["x", $Teekkari.mouse_pos.x],
+		["y", $Teekkari.mouse_pos.y],
+		["dx", $Teekkari.shoulder_pos.x],
+		["dy", $Teekkari.shoulder_pos.y],
+		["hx", $Teekkari.hand_pos.x],
+		["hy", $Teekkari.hand_pos.y],
+		["ma", $Teekkari.mouse_angle],
+		["aa", $Teekkari.arm_angle],
+		["d", $Teekkari.diff]])
 	

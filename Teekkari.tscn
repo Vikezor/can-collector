@@ -40,25 +40,26 @@ node_b = NodePath("../Torso")
 motor_target_velocity = 3.49066
 
 [node name="Arm" type="RigidBody2D" parent="."]
-position = Vector2(39, -71)
+position = Vector2(39, -92)
 collision_layer = 2
 collision_mask = 2
 mass = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm"]
-position = Vector2(100, -21)
+position = Vector2(99, 0)
 shape = SubResource("RectangleShape2D_g12rb")
 
-[node name="Marker2D" type="Marker2D" parent="Arm/CollisionShape2D"]
-position = Vector2(110, 0)
-
-[node name="Shoulder" type="PinJoint2D" parent="Arm"]
-position = Vector2(1, -21)
-node_a = NodePath("../../Torso")
-node_b = NodePath("..")
+[node name="Shoulder" type="PinJoint2D" parent="Arm/CollisionShape2D"]
+position = Vector2(-99, 0)
+node_a = NodePath("../../../Torso")
+node_b = NodePath("../..")
 motor_enabled = true
+
+[node name="Marker2D" type="Polygon2D" parent="Arm/CollisionShape2D"]
+position = Vector2(110, 0)
+polygon = PackedVector2Array(0, -11, 17, -11, 17, 11, 0, 11)
 
 [node name="TeekkariArm" type="Sprite2D" parent="Arm"]
 visible = false
-position = Vector2(102, -28)
+position = Vector2(100, -6)
 texture = ExtResource("3_scfj3")
