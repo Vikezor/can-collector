@@ -4,7 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://btia4len2h8u" path="res://teekkari/teekkari_top.png" id="2_cmqey"]
 
 [sub_resource type="SkeletonModification2DPhysicalBones" id="SkeletonModification2DPhysicalBones_xqeoy"]
+physical_bone_chain_length = 2
 fetch_bones = null
+joint_0_nodepath = NodePath("PhysicalTorso")
+joint_1_nodepath = NodePath("PhysicalTorso/PhysicalArm")
 
 [sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_oky28"]
 enabled = true
@@ -27,7 +30,6 @@ mass = 3.0
 bone2d_nodepath = NodePath("../Torso")
 bone2d_index = 0
 simulate_physics = true
-follow_bone_when_simulating = true
 
 [node name="PhysicalArm" type="PhysicalBone2D" parent="Skeleton/PhysicalTorso"]
 position = Vector2(0, -97)
@@ -35,7 +37,6 @@ mass = 2.0
 bone2d_nodepath = NodePath("../../Torso/Arm")
 bone2d_index = 1
 simulate_physics = true
-follow_bone_when_simulating = true
 
 [node name="Shoulder" type="PinJoint2D" parent="Skeleton/PhysicalTorso/PhysicalArm"]
 node_a = NodePath("../..")
@@ -46,6 +47,7 @@ rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 85.0
 bone_angle = -90.0
+metadata/_local_pose_override_enabled_ = true
 
 [node name="Legs" type="RigidBody2D" parent="Skeleton/Torso"]
 mass = 2.0
@@ -65,6 +67,7 @@ rest = Transform2D(1, 0, 0, 1, 0, -85)
 auto_calculate_length_and_angle = false
 length = 85.0
 bone_angle = 0.0
+metadata/_local_pose_override_enabled_ = true
 
 [node name="Hand" type="Marker2D" parent="Skeleton/Torso/Arm"]
 position = Vector2(85, 0)
