@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://3lekv1okhlvj"]
+[gd_scene load_steps=7 format=3 uid="uid://3lekv1okhlvj"]
 
 [ext_resource type="Script" path="res://Teekkari.gd" id="1_sxbi6"]
+[ext_resource type="Texture2D" uid="uid://btia4len2h8u" path="res://teekkari/teekkari_top.png" id="2_cmqey"]
 
 [sub_resource type="SkeletonModification2DPhysicalBones" id="SkeletonModification2DPhysicalBones_xqeoy"]
 fetch_bones = null
@@ -29,7 +30,7 @@ simulate_physics = true
 follow_bone_when_simulating = true
 
 [node name="PhysicalArm" type="PhysicalBone2D" parent="Skeleton/PhysicalTorso"]
-position = Vector2(0, -85)
+position = Vector2(0, -97)
 mass = 2.0
 bone2d_nodepath = NodePath("../../Torso/Arm")
 bone2d_index = 1
@@ -59,7 +60,7 @@ node_b = NodePath("../../../PhysicalTorso")
 motor_target_velocity = 3.49066
 
 [node name="Arm" type="Bone2D" parent="Skeleton/Torso"]
-position = Vector2(0, -85)
+position = Vector2(0, -97)
 rest = Transform2D(1, 0, 0, 1, 0, -85)
 auto_calculate_length_and_angle = false
 length = 85.0
@@ -69,3 +70,11 @@ bone_angle = 0.0
 position = Vector2(85, 0)
 
 [node name="Polygons" type="Node2D" parent="."]
+
+[node name="TorsoPolygon" type="Polygon2D" parent="Polygons"]
+position = Vector2(-122, -296)
+texture = ExtResource("2_cmqey")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(133.406, 473.562, -23.3839, 474.18, 17.9741, 326.031, 0.690125, 230.352, 52.542, 169.241, 2.54196, 39.6117, 113.653, -13.4747, 224.764, -3.59815, 238.344, 109.982, 190.814, 171.093, 190.814, 310.599, 102.542, 312.451)
+uv = PackedVector2Array(133.406, 473.562, -23.3839, 474.18, 17.9741, 326.031, 0.690125, 230.352, 52.542, 169.241, 2.54196, 39.6117, 113.653, -13.4747, 224.764, -3.59815, 238.344, 109.982, 190.814, 171.093, 190.814, 310.599, 102.542, 312.451)
+bones = ["Torso", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Torso/Arm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
