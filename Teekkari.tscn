@@ -5,13 +5,15 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bnody"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f0ryg"]
-radius = 20.2237
+radius = 85.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpujk"]
-size = Vector2(6, 37)
+[sub_resource type="SkeletonModification2DPhysicalBones" id="SkeletonModification2DPhysicalBones_xqeoy"]
+fetch_bones = null
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g12rb"]
-size = Vector2(34, 5.5)
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_oky28"]
+enabled = true
+modification_count = 1
+modifications/0 = SubResource("SkeletonModification2DPhysicalBones_xqeoy")
 
 [node name="Legs" type="RigidBody2D"]
 mass = 2.0
@@ -21,28 +23,42 @@ script = ExtResource("1_sxbi6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f0ryg")
 
-[node name="Torso" type="RigidBody2D" parent="."]
-mass = 3.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Torso"]
-position = Vector2(0, -15.5)
-shape = SubResource("RectangleShape2D_wpujk")
-
-[node name="Shoulder" type="PinJoint2D" parent="Torso"]
-position = Vector2(0, -24)
-node_a = NodePath("..")
-node_b = NodePath("../../Arm")
-
 [node name="Pelvis" type="PinJoint2D" parent="."]
 node_a = NodePath("..")
-node_b = NodePath("../Torso")
 motor_target_velocity = 3.49066
 
-[node name="Arm" type="RigidBody2D" parent="."]
-collision_layer = 2
-collision_mask = 2
-mass = 2.0
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+modification_stack = SubResource("SkeletonModificationStack2D_oky28")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm"]
-position = Vector2(14, -24)
-shape = SubResource("RectangleShape2D_g12rb")
+[node name="PhysicalTorso" type="PhysicalBone2D" parent="Skeleton2D"]
+mass = 3.0
+bone2d_nodepath = NodePath("../Torso")
+simulate_physics = true
+follow_bone_when_simulating = true
+
+[node name="PhysicalArm" type="PhysicalBone2D" parent="Skeleton2D/PhysicalTorso"]
+mass = 2.0
+bone2d_nodepath = NodePath("../../Torso/Arm")
+simulate_physics = true
+follow_bone_when_simulating = true
+
+[node name="Shoulder" type="PinJoint2D" parent="Skeleton2D/PhysicalTorso/PhysicalArm"]
+position = Vector2(0, -85)
+node_a = NodePath("../..")
+node_b = NodePath("..")
+
+[node name="Torso" type="Bone2D" parent="Skeleton2D"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+auto_calculate_length_and_angle = false
+length = 85.0
+bone_angle = -90.0
+
+[node name="Arm" type="Bone2D" parent="Skeleton2D/Torso"]
+position = Vector2(0, -85)
+rest = Transform2D(1, 0, 0, 1, 0, -85)
+auto_calculate_length_and_angle = false
+length = 85.0
+bone_angle = 0.0
+
+[node name="Marker2D" type="Marker2D" parent="Skeleton2D/Torso/Arm"]
+position = Vector2(85, 0)
