@@ -1,5 +1,7 @@
-extends RigidBody2D
+extends Node2D
 
+
+@onready var pelvis = $Skeleton/Torso/Legs/Pelvis
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,8 +16,8 @@ func _process(_delta):
 	if Input.is_action_pressed("MoveRight"):
 		target_velocity += -200
 	if target_velocity != 0:
-		$Pelvis.motor_enabled = true
-		$Pelvis.motor_target_velocity = target_velocity
+		pelvis.motor_enabled = true
+		pelvis.motor_target_velocity = target_velocity
 	else:
-		$Pelvis.motor_enabled = false
+		pelvis.motor_enabled = false
 	

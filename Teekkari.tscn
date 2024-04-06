@@ -2,11 +2,6 @@
 
 [ext_resource type="Script" path="res://Teekkari.gd" id="1_sxbi6"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bnody"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_f0ryg"]
-radius = 85.0
-
 [sub_resource type="SkeletonModification2DPhysicalBones" id="SkeletonModification2DPhysicalBones_xqeoy"]
 fetch_bones = null
 
@@ -15,50 +10,62 @@ enabled = true
 modification_count = 1
 modifications/0 = SubResource("SkeletonModification2DPhysicalBones_xqeoy")
 
-[node name="Legs" type="RigidBody2D"]
-mass = 2.0
-physics_material_override = SubResource("PhysicsMaterial_bnody")
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bnody"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f0ryg"]
+radius = 85.0
+
+[node name="Teekkari" type="Node2D"]
 script = ExtResource("1_sxbi6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_f0ryg")
-
-[node name="Pelvis" type="PinJoint2D" parent="."]
-node_a = NodePath("..")
-motor_target_velocity = 3.49066
-
-[node name="Skeleton2D" type="Skeleton2D" parent="."]
+[node name="Skeleton" type="Skeleton2D" parent="."]
 modification_stack = SubResource("SkeletonModificationStack2D_oky28")
 
-[node name="PhysicalTorso" type="PhysicalBone2D" parent="Skeleton2D"]
+[node name="PhysicalTorso" type="PhysicalBone2D" parent="Skeleton"]
 mass = 3.0
 bone2d_nodepath = NodePath("../Torso")
+bone2d_index = 0
 simulate_physics = true
 follow_bone_when_simulating = true
 
-[node name="PhysicalArm" type="PhysicalBone2D" parent="Skeleton2D/PhysicalTorso"]
+[node name="PhysicalArm" type="PhysicalBone2D" parent="Skeleton/PhysicalTorso"]
+position = Vector2(0, -85)
 mass = 2.0
 bone2d_nodepath = NodePath("../../Torso/Arm")
+bone2d_index = 1
 simulate_physics = true
 follow_bone_when_simulating = true
 
-[node name="Shoulder" type="PinJoint2D" parent="Skeleton2D/PhysicalTorso/PhysicalArm"]
-position = Vector2(0, -85)
+[node name="Shoulder" type="PinJoint2D" parent="Skeleton/PhysicalTorso/PhysicalArm"]
 node_a = NodePath("../..")
 node_b = NodePath("..")
 
-[node name="Torso" type="Bone2D" parent="Skeleton2D"]
+[node name="Torso" type="Bone2D" parent="Skeleton"]
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 85.0
 bone_angle = -90.0
 
-[node name="Arm" type="Bone2D" parent="Skeleton2D/Torso"]
+[node name="Legs" type="RigidBody2D" parent="Skeleton/Torso"]
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_bnody")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Skeleton/Torso/Legs"]
+shape = SubResource("CircleShape2D_f0ryg")
+
+[node name="Pelvis" type="PinJoint2D" parent="Skeleton/Torso/Legs"]
+node_a = NodePath("..")
+node_b = NodePath("../../../PhysicalTorso")
+motor_target_velocity = 3.49066
+
+[node name="Arm" type="Bone2D" parent="Skeleton/Torso"]
 position = Vector2(0, -85)
 rest = Transform2D(1, 0, 0, 1, 0, -85)
 auto_calculate_length_and_angle = false
 length = 85.0
 bone_angle = 0.0
 
-[node name="Marker2D" type="Marker2D" parent="Skeleton2D/Torso/Arm"]
+[node name="Hand" type="Marker2D" parent="Skeleton/Torso/Arm"]
 position = Vector2(85, 0)
+
+[node name="Polygons" type="Node2D" parent="."]
