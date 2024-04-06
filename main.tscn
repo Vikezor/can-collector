@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8a7nhevreuwu"]
+[gd_scene load_steps=5 format=3 uid="uid://b8a7nhevreuwu"]
 
 [ext_resource type="PackedScene" uid="uid://3lekv1okhlvj" path="res://Teekkari.tscn" id="1_3ebnl"]
+[ext_resource type="Script" path="res://DebugText.gd" id="2_3kgiv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vvjg6"]
 
@@ -8,9 +9,6 @@
 size = Vector2(1153, 98)
 
 [node name="Main" type="Node2D"]
-
-[node name="Teekkari" parent="." instance=ExtResource("1_3ebnl")]
-position = Vector2(1, -127)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_vvjg6")
@@ -20,3 +18,14 @@ position = Vector2(-0.5, 49)
 shape = SubResource("RectangleShape2D_18qku")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -145)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -610.0
+offset_top = -476.0
+offset_right = -570.0
+offset_bottom = -453.0
+script = ExtResource("2_3kgiv")
+
+[node name="Teekkari" parent="Label" instance=ExtResource("1_3ebnl")]
+position = Vector2(611, 349)
