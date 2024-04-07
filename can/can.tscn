@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://f1svhstelxyg"]
+
+[ext_resource type="Texture2D" uid="uid://bbbtm0fn7h5xn" path="res://can/can_01.png" id="1_nfoh6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ggjw"]
+size = Vector2(88, 133)
+
+[node name="Can" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 4.5)
+shape = SubResource("RectangleShape2D_4ggjw")
+
+[node name="Can01" type="Sprite2D" parent="."]
+texture = ExtResource("1_nfoh6")
