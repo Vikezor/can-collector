@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cqqs54ulc5h6k" path="res://background-images/BG_cloud03.png" id="5_ul4yt"]
 [ext_resource type="Texture2D" uid="uid://b3h4tuhk1buo8" path="res://background-images/BG_tent.png" id="6_vbxs0"]
 [ext_resource type="Texture2D" uid="uid://my81lk8ku35q" path="res://background-images/BG_manta.png" id="7_uw156"]
-[ext_resource type="Script" path="res://DebugText.gd" id="2_3kgiv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vvjg6"]
 
@@ -142,14 +141,3 @@ motion_scale = Vector2(0.95, 0)
 position = Vector2(3315, 333)
 scale = Vector2(0.557453, 0.557453)
 texture = ExtResource("7_uw156")
-position = Vector2(0, -145)
-
-[node name="Label" type="Label" parent="."]
-offset_left = -610.0
-offset_top = -476.0
-offset_right = -570.0
-offset_bottom = -453.0
-script = ExtResource("2_3kgiv")
-
-[node name="Teekkari" parent="Label" instance=ExtResource("1_3ebnl")]
-position = Vector2(611, 349)
