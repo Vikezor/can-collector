@@ -14,6 +14,8 @@ collision_mask = 8
 mass = 0.01
 gravity_scale = 4.0
 freeze_mode = 1
+max_contacts_reported = 5
+contact_monitor = true
 script = ExtResource("4_u360y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -47,4 +49,6 @@ texture = ExtResource("6_shm2p")
 visible = false
 texture = ExtResource("6_5oyah")
 
+[connection signal="body_entered" from="." to="Area2D" method="_on_can_body_entered"]
+[connection signal="body_exited" from="." to="Area2D" method="_on_can_body_exited"]
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
