@@ -7,4 +7,3 @@ func _ready():
 	var sprites = $Sprites.get_children()
 	var i = randi() % 4
 	sprites[i].visible = true
-	
