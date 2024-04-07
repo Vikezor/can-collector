@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8a7nhevreuwu"]
+[gd_scene load_steps=19 format=3 uid="uid://b8a7nhevreuwu"]
 
 [ext_resource type="Script" path="res://CameraController.gd" id="1_1kiwk"]
 [ext_resource type="PackedScene" uid="uid://3lekv1okhlvj" path="res://Teekkari.tscn" id="1_3ebnl"]
@@ -13,10 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://b3h4tuhk1buo8" path="res://background-images/BG_tent.png" id="6_vbxs0"]
 [ext_resource type="Texture2D" uid="uid://my81lk8ku35q" path="res://background-images/BG_manta.png" id="7_uw156"]
 [ext_resource type="PackedScene" uid="uid://f1svhstelxyg" path="res://can/can.tscn" id="10_adayk"]
+[ext_resource type="Script" path="res://Cans.gd" id="13_m0gh3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_l5u5f"]
 font_size = 30
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uttoq"]
+size = Vector2(1280, 720)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vvjg6"]
 
@@ -41,6 +45,13 @@ script = ExtResource("2_6516o")
 [node name="End" parent="Camera2D" instance=ExtResource("3_1fvnk")]
 visible = false
 z_index = 10
+
+[node name="Area2D" type="Area2D" parent="Camera2D"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Area2D"]
+shape = SubResource("RectangleShape2D_uttoq")
 
 [node name="Teekkari" parent="." instance=ExtResource("1_3ebnl")]
 position = Vector2(486, 355)
@@ -168,29 +179,12 @@ position = Vector2(1381.93, 290.15)
 scale = Vector2(0.557453, 0.557453)
 texture = ExtResource("7_uw156")
 
-[node name="Can" parent="." instance=ExtResource("10_adayk")]
-position = Vector2(828, 509)
+[node name="Cans" type="Node2D" parent="."]
+script = ExtResource("13_m0gh3")
 
-[node name="Can2" parent="." instance=ExtResource("10_adayk")]
-position = Vector2(1219, 501)
+[node name="Can" parent="Cans" instance=ExtResource("10_adayk")]
+position = Vector2(1055, 509)
 
-[node name="Can3" parent="." instance=ExtResource("10_adayk")]
-position = Vector2(1641, 500)
-
-[node name="Can4" parent="." instance=ExtResource("10_adayk")]
-position = Vector2(2070, 492)
-
-[node name="Can5" parent="." instance=ExtResource("10_adayk")]
-position = Vector2(2595, 487)
-
-[node name="Can6" parent="." instance=ExtResource("10_adayk")]
-position = Vector2(3360, 486)
-
-[node name="Can7" parent="." instance=ExtResource("10_adayk")]
-position = Vector2(4388, 488)
-
-[node name="Can8" parent="." instance=ExtResource("10_adayk")]
-position = Vector2(5146, 490)
-
+[connection signal="body_entered" from="Camera2D/Area2D" to="Cans" method="_on_area_2d_body_entered"]
 [connection signal="can_collected" from="Teekkari" to="Camera2D/Score" method="_on_teekkari_can_collected"]
 [connection signal="torso_hit" from="Teekkari" to="Camera2D" method="_on_teekkari_torso_hit"]
