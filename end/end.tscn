@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1rxx5ke3vrtl"]
+
+[ext_resource type="Texture2D" uid="uid://bhpisj7um45ko" path="res://end/End_Manta.png" id="1_amsny"]
+[ext_resource type="Texture2D" uid="uid://dvh7fq3t47dp3" path="res://end/End_text.png" id="2_m7qio"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_owhke"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[node name="End" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EndManta" type="Sprite2D" parent="."]
+position = Vector2(199, 337)
+texture = ExtResource("1_amsny")
+
+[node name="EndText" type="Sprite2D" parent="."]
+position = Vector2(784, 256)
+texture = ExtResource("2_m7qio")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = 39.5
+offset_right = 192.0
+offset_bottom = 84.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press anything to restart"
+label_settings = SubResource("LabelSettings_owhke")
+horizontal_alignment = 1
