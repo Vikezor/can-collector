@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 
 func _on_start_button_pressed():
 	print("Start game")
