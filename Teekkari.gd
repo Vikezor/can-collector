@@ -4,10 +4,12 @@ extends RigidBody2D
 @onready var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 @onready var shoulder_pos: Vector2 = get_viewport_coordinates($Arm/Shoulder)
 @onready var hand_pos: Vector2 = get_viewport_coordinates($Arm/Marker2D)
-@onready var mouse_angle = shoulder_pos.angle_to_point(mouse_pos)
+@onready var desired_angle = shoulder_pos.angle_to_point(mouse_pos)
 @onready var arm_angle = shoulder_pos.angle_to_point(hand_pos)
-@onready var diff = mouse_angle - arm_angle
+@onready var diff = desired_angle - arm_angle
 var attached_bodies = []
+var right_stick = Vector2()
+var mouse_active = true
 
 
 func get_viewport_coordinates(node: Node2D):
@@ -47,10 +49,11 @@ func _process(_delta):
 		$Pelvis.motor_target_velocity = target_velocity
 	else:
 		$Pelvis.motor_enabled = false
-
-	mouse_angle = shoulder_pos.angle_to_point(mouse_pos)
+	
+	if mouse_active:
+		desired_angle = shoulder_pos.angle_to_point(mouse_pos)
 	arm_angle = shoulder_pos.angle_to_point(hand_pos)
-	diff = mouse_angle - arm_angle
+	diff = desired_angle - arm_angle
 	if abs(diff) >= PI:
 		diff += (2 * PI * -sign(diff))
 	$Arm/Shoulder.motor_target_velocity = 100 * diff
@@ -62,9 +65,22 @@ func _process(_delta):
 		attached_bodies.all(detach)
 
 
+func use_right_stick():
+	mouse_active = false
+	desired_angle = right_stick.angle()
+
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_pos = event.position
+		mouse_active = true
+	if event is InputEventJoypadMotion:
+		if event.axis == JOY_AXIS_RIGHT_X:
+			right_stick.x = event.axis_value
+			use_right_stick()
+		elif event.axis == JOY_AXIS_RIGHT_Y:
+			right_stick.y = event.axis_value
+			use_right_stick()
 
 
 func _on_bag_can_collected(can: Node):
