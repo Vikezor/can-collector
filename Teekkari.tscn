@@ -29,6 +29,8 @@ shape = SubResource("CircleShape2D_f0ryg")
 
 [node name="Torso" type="RigidBody2D" parent="."]
 mass = 3.0
+max_contacts_reported = 5
+contact_monitor = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Torso"]
 position = Vector2(0, -143.5)
@@ -90,4 +92,5 @@ texture = ExtResource("4_nqr63")
 offset = Vector2(16, 111)
 script = ExtResource("5_54m11")
 
+[connection signal="body_entered" from="Torso" to="." method="_on_torso_body_entered"]
 [connection signal="can_collected" from="Torso/Bag" to="." method="_on_bag_can_collected"]

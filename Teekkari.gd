@@ -2,6 +2,7 @@ extends RigidBody2D
 
 
 signal can_collected()
+signal torso_hit()
 
 
 @onready var mouse_pos: Vector2 = get_viewport().get_mouse_position()
@@ -90,3 +91,8 @@ func _on_bag_can_collected(can: Node):
 	attached_bodies.erase(can)
 	can.queue_free()
 	can_collected.emit()
+
+
+func _on_torso_body_entered(body):
+	if body.name == "Ground":
+		torso_hit.emit()
