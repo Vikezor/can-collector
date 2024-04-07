@@ -1,19 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://3lekv1okhlvj"]
+[gd_scene load_steps=10 format=3 uid="uid://3lekv1okhlvj"]
 
 [ext_resource type="Script" path="res://Teekkari.gd" id="1_sxbi6"]
 [ext_resource type="Texture2D" uid="uid://81f5wi8h3058" path="res://teekkari/teekkari_top.png" id="2_0g2j5"]
 [ext_resource type="Texture2D" uid="uid://fqck55bj3mp7" path="res://teekkari/teekkari_arm.png" id="3_scfj3"]
+[ext_resource type="Texture2D" uid="uid://bh7kdmk227jdu" path="res://teekkari/teekkari_legs.png" id="4_nqr63"]
+[ext_resource type="Script" path="res://TeekkariLegs.gd" id="5_54m11"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bnody"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f0ryg"]
-radius = 115.92
+radius = 223.036
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpujk"]
 size = Vector2(100, 288)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g12rb"]
-size = Vector2(219, 21)
+size = Vector2(230.5, 21)
 
 [node name="Legs" type="RigidBody2D"]
 mass = 2.0
@@ -40,16 +42,17 @@ node_b = NodePath("../Torso")
 motor_target_velocity = 3.49066
 
 [node name="Arm" type="RigidBody2D" parent="."]
+z_index = -1
 position = Vector2(39, -92)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm"]
-position = Vector2(99, 0)
+position = Vector2(104.75, 0)
 shape = SubResource("RectangleShape2D_g12rb")
 
 [node name="TeekkariArm" type="Sprite2D" parent="Arm"]
-position = Vector2(100, -6)
+position = Vector2(106, 2)
 texture = ExtResource("3_scfj3")
 
 [node name="Shoulder" type="PinJoint2D" parent="Arm"]
@@ -59,4 +62,10 @@ bias = 0.9
 motor_enabled = true
 
 [node name="Marker2D" type="Marker2D" parent="Arm"]
-position = Vector2(209, 0)
+position = Vector2(220, 0)
+
+[node name="TeekkariLegs" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("4_nqr63")
+offset = Vector2(16, 111)
+script = ExtResource("5_54m11")
