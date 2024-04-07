@@ -24,6 +24,7 @@ func attach(node: Node2D):
 
 func detach(node: Node2D):
 	node.freeze = false
+	attached_bodies.erase(node)
 	return true
 
 
