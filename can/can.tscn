@@ -3,7 +3,7 @@
 [ext_resource type="Shape2D" uid="uid://b0gqw2iy6fetd" path="res://can/can_collision.tres" id="1_7jlsh"]
 [ext_resource type="Texture2D" uid="uid://bbbtm0fn7h5xn" path="res://can/can_01.png" id="1_nfoh6"]
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Can" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 8
 
@@ -11,12 +11,12 @@ collision_mask = 8
 position = Vector2(-1, 4.5)
 shape = ExtResource("1_7jlsh")
 
-[node name="Can" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 position = Vector2(-1, 4.5)
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Can"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("1_7jlsh")
 
 [node name="Can01" type="Sprite2D" parent="."]
