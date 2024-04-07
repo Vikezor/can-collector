@@ -152,7 +152,22 @@ texture = ExtResource("7_uw156")
 position = Vector2(828, 509)
 
 [node name="Can2" parent="." instance=ExtResource("10_adayk")]
-position = Vector2(963, 504)
+position = Vector2(1322, 504)
 
 [node name="Can3" parent="." instance=ExtResource("10_adayk")]
-position = Vector2(1094, 500)
+position = Vector2(1884, 502)
+
+[node name="Can4" parent="." instance=ExtResource("10_adayk")]
+position = Vector2(2448, 490)
+
+[node name="Can5" parent="." instance=ExtResource("10_adayk")]
+position = Vector2(3021, 487)
+
+[node name="Can6" parent="." instance=ExtResource("10_adayk")]
+position = Vector2(3654, 490)
+
+[node name="Can7" parent="." instance=ExtResource("10_adayk")]
+position = Vector2(4388, 488)
+
+[node name="Can8" parent="." instance=ExtResource("10_adayk")]
+position = Vector2(5146, 490)
