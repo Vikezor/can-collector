@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://3lekv1okhlvj"]
+[gd_scene load_steps=12 format=3 uid="uid://3lekv1okhlvj"]
 
 [ext_resource type="Script" path="res://Teekkari.gd" id="1_sxbi6"]
 [ext_resource type="Texture2D" uid="uid://81f5wi8h3058" path="res://teekkari/teekkari_top.png" id="2_0g2j5"]
+[ext_resource type="Shape2D" uid="uid://bsb7qrjgxbw6u" path="res://teekkari_arm_collision.tres" id="3_8nh5a"]
+[ext_resource type="Script" path="res://Bag.gd" id="3_qwkmn"]
 [ext_resource type="Texture2D" uid="uid://fqck55bj3mp7" path="res://teekkari/teekkari_arm.png" id="3_scfj3"]
 [ext_resource type="Texture2D" uid="uid://bh7kdmk227jdu" path="res://teekkari/teekkari_legs.png" id="4_nqr63"]
 [ext_resource type="Script" path="res://TeekkariLegs.gd" id="5_54m11"]
@@ -14,8 +16,8 @@ radius = 223.036
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpujk"]
 size = Vector2(100, 288)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g12rb"]
-size = Vector2(230.5, 21)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ja3w5"]
+size = Vector2(113, 53)
 
 [node name="Legs" type="RigidBody2D"]
 mass = 2.0
@@ -36,6 +38,16 @@ shape = SubResource("RectangleShape2D_wpujk")
 position = Vector2(-9.5, -64)
 texture = ExtResource("2_0g2j5")
 
+[node name="Bag" type="Area2D" parent="Torso"]
+position = Vector2(-65, 104)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("3_qwkmn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Torso/Bag"]
+position = Vector2(1.5, -45.5)
+shape = SubResource("RectangleShape2D_ja3w5")
+
 [node name="Pelvis" type="PinJoint2D" parent="."]
 node_a = NodePath("..")
 node_b = NodePath("../Torso")
@@ -49,7 +61,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm"]
 position = Vector2(104.75, 0)
-shape = SubResource("RectangleShape2D_g12rb")
+shape = ExtResource("3_8nh5a")
 
 [node name="TeekkariArm" type="Sprite2D" parent="Arm"]
 position = Vector2(106, 2)
@@ -64,8 +76,18 @@ motor_enabled = true
 [node name="Marker2D" type="Marker2D" parent="Arm"]
 position = Vector2(220, 0)
 
+[node name="Area2D" type="Area2D" parent="Arm"]
+position = Vector2(105, 0)
+collision_layer = 12
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm/Area2D"]
+shape = ExtResource("3_8nh5a")
+
 [node name="TeekkariLegs" type="Sprite2D" parent="."]
 z_index = -1
 texture = ExtResource("4_nqr63")
 offset = Vector2(16, 111)
 script = ExtResource("5_54m11")
+
+[connection signal="can_collected" from="Torso/Bag" to="." method="_on_bag_can_collected"]

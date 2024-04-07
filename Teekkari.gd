@@ -7,10 +7,25 @@ extends RigidBody2D
 @onready var mouse_angle = shoulder_pos.angle_to_point(mouse_pos)
 @onready var arm_angle = shoulder_pos.angle_to_point(hand_pos)
 @onready var diff = mouse_angle - arm_angle
+var attached_bodies = []
 
 
 func get_viewport_coordinates(node: Node2D):
 	return node.get_viewport().get_screen_transform() * node.get_global_transform_with_canvas() * node.position
+
+
+func attach(node: Node2D):
+	if node is RigidBody2D and not attached_bodies.has(node):
+		node.reparent($Arm)
+		node.freeze = true
+		attached_bodies.append(node)
+	return true
+
+
+func detach(node: Node2D):
+	node.freeze = false
+	attached_bodies.erase(node)
+	return true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -38,9 +53,20 @@ func _process(_delta):
 	diff = mouse_angle - arm_angle
 	if abs(diff) >= PI:
 		diff += (2 * PI * -sign(diff))
-	$Arm/Shoulder.motor_target_velocity = 360 / PI * diff
+	$Arm/Shoulder.motor_target_velocity = 100 * diff
+
+	if Input.is_action_just_pressed("PickUp"):
+		var bodies = $Arm/Area2D.get_overlapping_bodies()
+		bodies.all(attach)
+	if Input.is_action_just_released("PickUp"):
+		attached_bodies.all(detach)
 
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_pos = event.position
+
+
+func _on_bag_can_collected(can: Node):
+	attached_bodies.erase(can)
+	can.queue_free()
