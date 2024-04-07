@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://3lekv1okhlvj"]
+[gd_scene load_steps=11 format=3 uid="uid://3lekv1okhlvj"]
 
 [ext_resource type="Script" path="res://Teekkari.gd" id="1_sxbi6"]
 [ext_resource type="Texture2D" uid="uid://81f5wi8h3058" path="res://teekkari/teekkari_top.png" id="2_0g2j5"]
@@ -13,6 +13,9 @@ radius = 223.036
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpujk"]
 size = Vector2(100, 288)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ja3w5"]
+size = Vector2(113, 135)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g12rb"]
 size = Vector2(230.5, 21)
@@ -35,6 +38,13 @@ shape = SubResource("RectangleShape2D_wpujk")
 [node name="TeekkariTop" type="Sprite2D" parent="Torso"]
 position = Vector2(-9.5, -64)
 texture = ExtResource("2_0g2j5")
+
+[node name="Bag" type="Area2D" parent="Torso"]
+position = Vector2(-65, 104)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Torso/Bag"]
+position = Vector2(1.5, -4.5)
+shape = SubResource("RectangleShape2D_ja3w5")
 
 [node name="Pelvis" type="PinJoint2D" parent="."]
 node_a = NodePath("..")
