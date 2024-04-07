@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8a7nhevreuwu"]
+[gd_scene load_steps=14 format=3 uid="uid://b8a7nhevreuwu"]
 
 [ext_resource type="Script" path="res://CameraController.gd" id="1_1kiwk"]
 [ext_resource type="PackedScene" uid="uid://3lekv1okhlvj" path="res://Teekkari.tscn" id="1_3ebnl"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cqqs54ulc5h6k" path="res://background-images/BG_cloud03.png" id="5_ul4yt"]
 [ext_resource type="Texture2D" uid="uid://b3h4tuhk1buo8" path="res://background-images/BG_tent.png" id="6_vbxs0"]
 [ext_resource type="Texture2D" uid="uid://my81lk8ku35q" path="res://background-images/BG_manta.png" id="7_uw156"]
+[ext_resource type="PackedScene" uid="uid://f1svhstelxyg" path="res://can/can.tscn" id="10_adayk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vvjg6"]
 
@@ -27,6 +28,8 @@ script = ExtResource("1_1kiwk")
 position = Vector2(486, 355)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 9
+collision_mask = 9
 physics_material_override = SubResource("PhysicsMaterial_vvjg6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -144,3 +147,12 @@ motion_scale = Vector2(0.95, 0)
 position = Vector2(1381.93, 290.15)
 scale = Vector2(0.557453, 0.557453)
 texture = ExtResource("7_uw156")
+
+[node name="Can" parent="." instance=ExtResource("10_adayk")]
+position = Vector2(828, 509)
+
+[node name="Can2" parent="." instance=ExtResource("10_adayk")]
+position = Vector2(963, 504)
+
+[node name="Can3" parent="." instance=ExtResource("10_adayk")]
+position = Vector2(1094, 500)

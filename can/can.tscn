@@ -1,21 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://f1svhstelxyg"]
+[gd_scene load_steps=8 format=3 uid="uid://f1svhstelxyg"]
 
 [ext_resource type="Shape2D" uid="uid://b0gqw2iy6fetd" path="res://can/can_collision.tres" id="1_7jlsh"]
 [ext_resource type="Texture2D" uid="uid://bbbtm0fn7h5xn" path="res://can/can_01.png" id="1_nfoh6"]
 [ext_resource type="Script" path="res://can/can.gd" id="2_n0fdj"]
+[ext_resource type="Script" path="res://can/can_sprite.gd" id="4_u360y"]
+[ext_resource type="Texture2D" uid="uid://b5aualn3difca" path="res://can/can_02.png" id="5_yjshe"]
+[ext_resource type="Texture2D" uid="uid://bnqu8aqivv1sf" path="res://can/can_04.png" id="6_5oyah"]
+[ext_resource type="Texture2D" uid="uid://cjolcjy250oui" path="res://can/can_03.png" id="6_shm2p"]
 
 [node name="Can" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 8
 mass = 0.01
 freeze_mode = 1
+script = ExtResource("4_u360y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 4.5)
+position = Vector2(0, 4.5)
 shape = ExtResource("1_7jlsh")
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-1, 4.5)
+position = Vector2(0, 4.5)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("2_n0fdj")
@@ -23,7 +28,22 @@ script = ExtResource("2_n0fdj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = ExtResource("1_7jlsh")
 
-[node name="Can01" type="Sprite2D" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Can01" type="Sprite2D" parent="Sprites"]
+position = Vector2(1, 0)
 texture = ExtResource("1_nfoh6")
+
+[node name="Can02" type="Sprite2D" parent="Sprites"]
+visible = false
+texture = ExtResource("5_yjshe")
+
+[node name="Can03" type="Sprite2D" parent="Sprites"]
+visible = false
+texture = ExtResource("6_shm2p")
+
+[node name="Can04" type="Sprite2D" parent="Sprites"]
+visible = false
+texture = ExtResource("6_5oyah")
 
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]

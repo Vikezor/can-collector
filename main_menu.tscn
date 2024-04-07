@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://nc1j8itj3207"]
+[gd_scene load_steps=5 format=3 uid="uid://duhsprmb8wjv8"]
 
 [ext_resource type="Script" path="res://MainMenuButtons.gd" id="1_otpl3"]
 [ext_resource type="Texture2D" uid="uid://bedfha0qppt1q" path="res://background-images/Artboard 4.png" id="2_tkpli"]
