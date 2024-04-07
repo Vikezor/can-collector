@@ -1,4 +1,4 @@
-extends RigidBody2D
+class_name Can extends RigidBody2D
 	
 
 # Called when the node enters the scene tree for the first time.
