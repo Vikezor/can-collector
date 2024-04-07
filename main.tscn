@@ -13,7 +13,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vvjg6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18qku"]
-size = Vector2(1153, 98)
+size = Vector2(9777, 98)
 
 [node name="Main" type="Node2D"]
 
@@ -27,7 +27,7 @@ position = Vector2(86, -102)
 physics_material_override = SubResource("PhysicsMaterial_vvjg6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(578, 598)
+position = Vector2(3597.5, 598)
 shape = SubResource("RectangleShape2D_18qku")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -39,14 +39,14 @@ motion_scale = Vector2(0, 0)
 
 [node name="BgSky" type="Sprite2D" parent="ParallaxBackground/StaticBackground"]
 texture_repeat = 2
-position = Vector2(625, 316.5)
-scale = Vector2(32.2759, 0.89982)
+position = Vector2(3544, 316.5)
+scale = Vector2(167.793, 0.89982)
 texture = ExtResource("4_rc0vl")
 
 [node name="BgGround" type="Sprite2D" parent="ParallaxBackground/StaticBackground"]
 texture_repeat = 2
-position = Vector2(684, 684)
-scale = Vector2(25.5297, 1)
+position = Vector2(3544, 684)
+scale = Vector2(164.949, 1)
 texture = ExtResource("3_bc338")
 
 [node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
