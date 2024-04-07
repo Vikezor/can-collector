@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8a7nhevreuwu"]
+[gd_scene load_steps=16 format=3 uid="uid://b8a7nhevreuwu"]
 
 [ext_resource type="Script" path="res://CameraController.gd" id="1_1kiwk"]
 [ext_resource type="PackedScene" uid="uid://3lekv1okhlvj" path="res://Teekkari.tscn" id="1_3ebnl"]
+[ext_resource type="Script" path="res://Score.gd" id="2_6516o"]
 [ext_resource type="Script" path="res://ParallaxBackground-Testing.gd" id="2_ymooc"]
 [ext_resource type="Texture2D" uid="uid://ck8wpn4q7ryss" path="res://background-images/BG_ground.png" id="3_bc338"]
 [ext_resource type="Texture2D" uid="uid://b7f0wynsuktum" path="res://background-images/BG_cloud01.png" id="3_mo82e"]
@@ -11,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://b3h4tuhk1buo8" path="res://background-images/BG_tent.png" id="6_vbxs0"]
 [ext_resource type="Texture2D" uid="uid://my81lk8ku35q" path="res://background-images/BG_manta.png" id="7_uw156"]
 [ext_resource type="PackedScene" uid="uid://f1svhstelxyg" path="res://can/can.tscn" id="10_adayk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l5u5f"]
+font_size = 30
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vvjg6"]
 
@@ -23,6 +28,15 @@ size = Vector2(9777, 59)
 position = Vector2(578, 320)
 limit_left = 0
 script = ExtResource("1_1kiwk")
+
+[node name="Score" type="Label" parent="Camera2D"]
+offset_left = -574.0
+offset_top = -317.0
+offset_right = -518.0
+offset_bottom = -294.0
+text = "Cans: 0"
+label_settings = SubResource("LabelSettings_l5u5f")
+script = ExtResource("2_6516o")
 
 [node name="Teekkari" parent="." instance=ExtResource("1_3ebnl")]
 position = Vector2(486, 355)
@@ -171,3 +185,5 @@ position = Vector2(4388, 488)
 
 [node name="Can8" parent="." instance=ExtResource("10_adayk")]
 position = Vector2(5146, 490)
+
+[connection signal="can_collected" from="Teekkari" to="Camera2D/Score" method="_on_teekkari_can_collected"]

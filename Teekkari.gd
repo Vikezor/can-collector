@@ -1,6 +1,9 @@
 extends RigidBody2D
 
 
+signal can_collected()
+
+
 @onready var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 @onready var shoulder_pos: Vector2 = get_viewport_coordinates($Arm/Shoulder)
 @onready var hand_pos: Vector2 = get_viewport_coordinates($Arm/Marker2D)
@@ -86,3 +89,4 @@ func _input(event):
 func _on_bag_can_collected(can: Node):
 	attached_bodies.erase(can)
 	can.queue_free()
+	can_collected.emit()
